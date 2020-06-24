@@ -77,19 +77,6 @@ def fetch_from_rapid_pro(user, google_cloud_credentials_file_path, raw_data_dir,
         traced_runs = rapid_pro.convert_runs_to_traced_data(
             user, raw_runs, raw_contacts, phone_number_uuid_table, rapid_pro_source.test_contact_uuids)
 
-        if flow in rapid_pro_source.activation_flow_names:
-            # Append the Rapid Pro source name to each run.
-            # Only do this for activation flows because this is the only place where this is interesting.
-            # Also, demogs may come from either instance, which causes problems downstream.
-            for td in traced_runs:
-                td.append_data({
-                    "source_raw": rapid_pro_source.source_name,
-                    "source_coded": CleaningUtils.make_label_from_cleaner_code(
-                        CodeSchemes.SOURCE, CodeSchemes.SOURCE.get_code_with_match_value(rapid_pro_source.source_name),
-                        Metadata.get_call_location()
-                    ).to_dict()
-                }, Metadata(user, Metadata.get_call_location(), TimeUtils.utc_now_as_iso_string()))
-
         log.info(f"Saving {len(raw_runs)} raw runs to {raw_runs_path}...")
         with open(raw_runs_path, "w") as raw_runs_file:
             json.dump([run.serialize() for run in raw_runs], raw_runs_file)

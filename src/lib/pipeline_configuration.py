@@ -175,7 +175,7 @@ class RawDataSource(ABC):
 
 
 class RapidProSource(RawDataSource):
-    def __init__(self, source_name, domain, token_file_url, contacts_file_name, activation_flow_names,
+    def __init__(self, domain, token_file_url, contacts_file_name, activation_flow_names,
                  survey_flow_names, test_contact_uuids):
         """
         :param domain: URL of the Rapid Pro server to download data from.
@@ -193,7 +193,6 @@ class RapidProSource(RawDataSource):
                                    and dropped when the pipeline is run with "FilterTestMessages" set to true.
         :type test_contact_uuids: list of str
         """
-        self.source_name = source_name
         self.domain = domain
         self.token_file_url = token_file_url
         self.contacts_file_name = contacts_file_name
@@ -211,7 +210,6 @@ class RapidProSource(RawDataSource):
 
     @classmethod
     def from_configuration_dict(cls, configuration_dict):
-        source_name = configuration_dict["SourceName"]
         domain = configuration_dict["Domain"]
         token_file_url = configuration_dict["TokenFileURL"]
         contacts_file_name = configuration_dict["ContactsFileName"]
@@ -219,11 +217,10 @@ class RapidProSource(RawDataSource):
         survey_flow_names = configuration_dict.get("SurveyFlowNames", [])
         test_contact_uuids = configuration_dict.get("TestContactUUIDs", [])
 
-        return cls(source_name, domain, token_file_url, contacts_file_name, activation_flow_names,
+        return cls(domain, token_file_url, contacts_file_name, activation_flow_names,
                    survey_flow_names, test_contact_uuids)
 
     def validate(self):
-        validators.validate_string(self.source_name, "source_name")
         validators.validate_string(self.domain, "domain")
         validators.validate_string(self.token_file_url, "token_file_url")
         validators.validate_string(self.contacts_file_name, "contacts_file_name")
