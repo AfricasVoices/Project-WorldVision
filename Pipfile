@@ -1,0 +1,26 @@
+[[source]]
+url = "https://pypi.python.org/simple"
+verify_ssl = true
+name = "pypi"
+
+[packages]
+CoreDataModules = {editable = true,git = "https://www.github.com/AfricasVoices/CoreDataModules",ref = "v0.14.1"}
+PipelineInfrastructure = {editable = true,git = "https://www.github.com/AfricasVoices/Pipeline-Infrastructure",ref = "v0.0.8"}
+RapidProTools = {editable = true,git = "https://www.github.com/AfricasVoices/RapidProTools",ref = "v0.3.3"}
+pytz = "*"
+python-dateutil = ">=2.8.0"  # Need this minimum so that isoparse handles T24:00:00 correctly.
+google-cloud-storage = "*"
+pyinstrument = "*"
+plotly = "*"
+requests = "*"  # Needed by plotly's image exporter.
+psutil = "*"  # Needed by plotly's image exporter.
+pandas = "*"  # Needed by plotly's express library.
+geopandas = "*"
+matplotlib = "*"  # Needed by geopandas to plot maps.
+descartes = "*"  # Needed by geopandas to plot polygons.
+mapclassify = "*"  # Needed by geopandas for choropleth classification
+
+[dev-packages]
+
+[requires]
+python_version = "3.6"
