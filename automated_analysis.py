@@ -215,10 +215,12 @@ if __name__ == "__main__":
                     }
 
                     # Only compute a percentage for relevant codes.
-                    if code.code_type == CodeTypes.NORMAL:
-                        row["Percent"] = round(participants_with_opt_ins / total_relevant[cc.analysis_file_key] * 100, 1)
-                    else:
+                    if code.code_type != CodeTypes.NORMAL:
                         row["Percent"] = ""
+                    elif total_relevant[cc.analysis_file_key] == 0:
+                        row["Percent"] = "-"
+                    else:
+                        row["Percent"] = round(participants_with_opt_ins / total_relevant[cc.analysis_file_key] * 100, 1)
 
                     writer.writerow(row)
 
