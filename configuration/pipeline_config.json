@@ -1,0 +1,53 @@
+{
+  "PipelineName": "WorldVision",
+  "RawDataSources": [
+    {
+      "SourceType": "RapidPro",
+      "Domain": "textit.in",
+      "TokenFileURL": "gs://avf-credentials/world-vision-textit-token.txt",
+      "ContactsFileName": "contacts",
+      "ActivationFlowNames": [
+        "worldvision_s01e01_activation"
+      ],
+      "SurveyFlowNames": [
+        "worldvision_s01_demog"
+      ],
+      "TestContactUUIDs": [
+        "3c2d94f4-3833-4828-a577-cd6c082135df",
+        "015c8230-23b3-4207-b961-ebcc7acc1da9"
+      ]
+    }
+  ],
+  "PhoneNumberUuidTable": {
+    "FirebaseCredentialsFileURL": "gs://avf-credentials/avf-id-infrastructure-firebase-adminsdk-6xps8-b9173f2bfd.json",
+    "TableName": "WorldVision_phone_number_avf_phone_id"
+  },
+  "RapidProKeyRemappings": [
+    {"RapidProKey": "avf_phone_id", "PipelineKey": "uid"},
+
+    {"RapidProKey": "Rqa_S01E01 (Text) - worldvision_s01e01_activation", "PipelineKey": "rqa_s01e01_raw", "IsActivationMessage": true},
+    {"RapidProKey": "Rqa_S01E01 (Run ID) - worldvision_s01e01_activation", "PipelineKey": "rqa_s01e01_run_id"},
+    {"RapidProKey": "Rqa_S01E01 (Time) - worldvision_s01e01_activation", "PipelineKey": "sent_on"},
+
+    {"RapidProKey": "Constituency (Text) - worldvision_s01_demog", "PipelineKey": "location_raw"},
+    {"RapidProKey": "Constituency (Time) - worldvision_s01_demog", "PipelineKey": "location_time"},
+    {"RapidProKey": "Gender (Text) - worldvision_s01_demog", "PipelineKey": "gender_raw"},
+    {"RapidProKey": "Gender (Time) - worldvision_s01_demog", "PipelineKey": "gender_time"},
+    {"RapidProKey": "Age (Text) - worldvision_s01_demog", "PipelineKey": "age_raw"},
+    {"RapidProKey": "Age (Time) - worldvision_s01_demog", "PipelineKey": "age_time"}
+  ],
+  "ProjectStartDate": "2020-07-06T00:00:00+03:00",
+  "ProjectEndDate": "2100-01-01T00:00:00+03:00",
+  "FilterTestMessages": false,
+  "MoveWSMessages": false,
+  "DriveUpload": {
+    "DriveCredentialsFileURL": "gs://avf-credentials/pipeline-runner-service-acct-avf-data-core-64cc71459fe7.json",
+    "ProductionUploadPath": "worldvision_analysis_outputs/worldvision_production.csv",
+    "MessagesUploadPath": "worldvision_analysis_outputs/worldvision_messages.csv",
+    "IndividualsUploadPath": "worldvision_analysis_outputs/worldvision_individuals.csv",
+    "AnalysisGraphsDir": "worldvision_analysis_outputs/Automated Analysis"
+  },
+  "MemoryProfileUploadBucket": "gs://avf-pipeline-logs-performance-nearline",
+  "DataArchiveUploadBucket": "gs://pipeline-execution-backup-archive",
+  "BucketDirPath": "2020/WorldVision"
+}
