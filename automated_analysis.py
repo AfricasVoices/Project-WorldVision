@@ -1,22 +1,16 @@
 import argparse
 import csv
-import json
 import random
 from collections import OrderedDict
-from glob import glob
 
 import geopandas
 import matplotlib.pyplot as plt
 import plotly.express as px
 from core_data_modules.cleaners import Codes
-from core_data_modules.cleaners.codes import KenyaCodes
-from core_data_modules.cleaners.location_tools import KenyaLocations
 from core_data_modules.data_models.code_scheme import CodeTypes
 from core_data_modules.logging import Logger
 from core_data_modules.traced_data.io import TracedDataJsonIO
 from core_data_modules.util import IOUtils
-from storage.google_cloud import google_cloud_utils
-from storage.google_drive import drive_client_wrapper
 
 from configuration.code_schemes import CodeSchemes
 from src import AnalysisUtils
@@ -34,9 +28,6 @@ if __name__ == "__main__":
                                                  "`generate_outputs.py`, and optionally uploads the outputs to Drive.")
 
     parser.add_argument("user", help="User launching this program")
-    parser.add_argument("google_cloud_credentials_file_path", metavar="google-cloud-credentials-file-path",
-                        help="Path to a Google Cloud service account credentials file to use to access the "
-                             "credentials bucket")
     parser.add_argument("pipeline_configuration_file_path", metavar="pipeline-configuration-file",
                         help="Path to the pipeline configuration json file")
 
@@ -50,7 +41,6 @@ if __name__ == "__main__":
     args = parser.parse_args()
 
     user = args.user
-    google_cloud_credentials_file_path = args.google_cloud_credentials_file_path
     pipeline_configuration_file_path = args.pipeline_configuration_file_path
 
     messages_json_input_path = args.messages_json_input_path
