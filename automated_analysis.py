@@ -60,7 +60,6 @@ if __name__ == "__main__":
     IOUtils.ensure_dirs_exist(automated_analysis_output_dir)
     IOUtils.ensure_dirs_exist(f"{automated_analysis_output_dir}/maps/counties")
     IOUtils.ensure_dirs_exist(f"{automated_analysis_output_dir}/maps/constituencies")
-    IOUtils.ensure_dirs_exist(f"{automated_analysis_output_dir}/maps/urban")
     IOUtils.ensure_dirs_exist(f"{automated_analysis_output_dir}/graphs")
 
     log.info("Loading Pipeline Configuration File...")
@@ -498,68 +497,6 @@ if __name__ == "__main__":
                 inset_region=(36.62, -1.46, 37.12, -1.09), zoom=3, inset_position=(35.60, -2.95), ax=ax)
             MappingUtils.plot_water_bodies(lakes_map, ax=ax)
             plt.savefig(f"{automated_analysis_output_dir}/maps/constituencies/constituency_{cc.analysis_file_key}total_relevant.png",
-                        dpi=1200, bbox_inches="tight")
-            plt.close(fig)
-
-    # Produce maps of Nairobi/Kiambu at constituency level
-    log.info("Loading the Kenya constituency geojson...")
-    constituencies_map = geopandas.read_file("geojson/kenya_constituencies.geojson")
-    urban_map = constituencies_map[constituencies_map.ADM1_AVF.isin({KenyaCodes.NAIROBI, KenyaCodes.KIAMBU})]
-
-    # Constituencies to label with their name, as requested by RDA for COVID19-KE-Urban
-    constituencies_to_label_with_name = {
-        # TODO: Switch to use KenyaCodes instead of strings
-        "kibra", "mathare", "embakasi_east", "embakasi_central", "kasarani",  # requested because urban-poor targets
-        "ruiru", "kikuyu", "kiambu"  # requested due to high participation
-    }
-
-    constituency_display_names = dict()  # of constituency id -> constituency name to display
-    for i, admin_region in constituencies_map.iterrows():
-        constituency_display_names[admin_region.ADM2_AVF] = admin_region.ADM2_EN
-
-    log.info("Generating a map of participation in Nairobi/Kiambu for the season")
-    urban_frequencies = dict()
-    labels = dict()
-    for code in CodeSchemes.KENYA_CONSTITUENCY.codes:
-        if code.code_type == CodeTypes.NORMAL:
-            urban_frequencies[code.string_value] = demographic_distributions["constituency"][code.code_id]
-
-            if code.string_value in constituencies_to_label_with_name:
-                constituency_name = constituency_display_names[code.string_value]
-                labels[code.string_value] = constituency_name + "\n" + str(urban_frequencies[code.string_value])
-            else:
-                labels[code.string_value] = str(urban_frequencies[code.string_value])
-
-    fig, ax = plt.subplots()
-    MappingUtils.plot_frequency_map(urban_map, "ADM2_AVF", urban_frequencies, ax=ax,
-                                    labels=labels, label_position_columns=("ADM2_LX", "ADM2_LY"),
-                                    callout_position_columns=("ADM2_CALLX", "ADM2_CALLY"))
-    fig.savefig(f"{automated_analysis_output_dir}/maps/urban/urban_total_participants.png", dpi=1200, bbox_inches="tight")
-    plt.close(fig)
-
-    for plan in PipelineConfiguration.RQA_CODING_PLANS:
-        episode = episodes[plan.raw_field]
-
-        for cc in plan.coding_configurations:
-            # Plot a map of the total relevant participants for this coding configuration.
-            rqa_total_urban_frequencies = dict()
-            labels = dict()
-            for code in CodeSchemes.KENYA_CONSTITUENCY.codes:
-                if code.code_type == CodeTypes.NORMAL:
-                    rqa_total_urban_frequencies[code.string_value] = \
-                        episode["Total Relevant Participants"][f"constituency:{code.string_value}"]
-
-                    if code.string_value in constituencies_to_label_with_name:
-                        constituency_name = constituency_display_names[code.string_value]
-                        labels[code.string_value] = constituency_name + "\n" + str(rqa_total_urban_frequencies[code.string_value])
-                    else:
-                        labels[code.string_value] = str(rqa_total_urban_frequencies[code.string_value])
-
-            fig, ax = plt.subplots()
-            MappingUtils.plot_frequency_map(urban_map, "ADM2_AVF", rqa_total_urban_frequencies, ax=ax,
-                                            labels=labels, label_position_columns=("ADM2_LX", "ADM2_LY"),
-                                            callout_position_columns=("ADM2_CALLX", "ADM2_CALLY"))
-            plt.savefig(f"{automated_analysis_output_dir}/maps/urban/urban_{cc.analysis_file_key}total_relevant.png",
                         dpi=1200, bbox_inches="tight")
             plt.close(fig)
 
