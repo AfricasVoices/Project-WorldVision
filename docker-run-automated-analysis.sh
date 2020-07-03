@@ -21,21 +21,20 @@ done
 
 
 # Check that the correct number of arguments were provided.
-if [[ $# -ne 6 ]]; then
+if [[ $# -ne 5 ]]; then
     echo "Usage: ./docker-run.sh
     [--profile-cpu <profile-output-path>]
-    <user> <google-cloud-credentials-file-path> <pipeline-configuration-file-path>
+    <user> <pipeline-configuration-file-path>
     <messages-traced-data> <individuals-traced-data> <automated-analysis-output-dir>"
     exit
 fi
 
 # Assign the program arguments to bash variables.
 USER=$1
-INPUT_GOOGLE_CLOUD_CREDENTIALS=$2
-INPUT_PIPELINE_CONFIGURATION=$3
-INPUT_MESSAGES_TRACED_DATA=$4
-INPUT_INDIVIDUALS_TRACED_DATA=$5
-AUTOMATED_ANALYSIS_OUTPUT_DIR=$6
+INPUT_PIPELINE_CONFIGURATION=$2
+INPUT_MESSAGES_TRACED_DATA=$3
+INPUT_INDIVIDUALS_TRACED_DATA=$4
+AUTOMATED_ANALYSIS_OUTPUT_DIR=$5
 
 # Build an image for this pipeline stage.
 docker build -t "$IMAGE_NAME" .
@@ -46,7 +45,7 @@ if [[ "$PROFILE_CPU" = true ]]; then
     SYS_PTRACE_CAPABILITY="--cap-add SYS_PTRACE"
 fi
 CMD="pipenv run python -u $PROFILE_CPU_CMD automated_analysis.py \
-    \"$USER\" /credentials/google-cloud-credentials.json /data/pipeline_configuration.json \
+    \"$USER\" /data/pipeline_configuration.json \
     /data/messages-traced-data.jsonl /data/individuals-traced-data.jsonl /data/automated-analysis-outputs
 "
 container="$(docker container create ${SYS_PTRACE_CAPABILITY} -w /app "$IMAGE_NAME" /bin/bash -c "$CMD")"
@@ -56,9 +55,6 @@ container_short_id=${container:0:7}
 # Copy input data into the container
 echo "Copying $INPUT_PIPELINE_CONFIGURATION -> $container_short_id:/data/pipeline_configuration.json"
 docker cp "$INPUT_PIPELINE_CONFIGURATION" "$container:/data/pipeline_configuration.json"
-
-echo "Copying $INPUT_GOOGLE_CLOUD_CREDENTIALS -> $container_short_id:/credentials/google-cloud-credentials.json"
-docker cp "$INPUT_GOOGLE_CLOUD_CREDENTIALS" "$container:/credentials/google-cloud-credentials.json"
 
 echo "Copying $INPUT_MESSAGES_TRACED_DATA -> $container_short_id:/data/messages-traced-data.jsonl"
 docker cp "$INPUT_MESSAGES_TRACED_DATA" "$container:/data/messages-traced-data.jsonl"
