@@ -36,10 +36,10 @@
     {"RapidProKey": "Age (Text) - worldvision_s01_demog", "PipelineKey": "age_raw"},
     {"RapidProKey": "Age (Time) - worldvision_s01_demog", "PipelineKey": "age_time"}
   ],
-  "ProjectStartDate": "2020-07-06T00:00:00+03:00",
+  "ProjectStartDate": "2020-07-13T00:00:00+03:00",
   "ProjectEndDate": "2100-01-01T00:00:00+03:00",
   "FilterTestMessages": false,
-  "MoveWSMessages": false,
+  "MoveWSMessages": true,
   "DriveUpload": {
     "DriveCredentialsFileURL": "gs://avf-credentials/pipeline-runner-service-acct-avf-data-core-64cc71459fe7.json",
     "ProductionUploadPath": "worldvision_analysis_outputs/worldvision_production.csv",
