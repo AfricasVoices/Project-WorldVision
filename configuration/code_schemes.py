@@ -16,5 +16,6 @@ class CodeSchemes(object):
     KENYA_COUNTY = _open_scheme("kenya_county.json")
     GENDER = _open_scheme("gender.json")
     AGE = _open_scheme("age.json")
+    AGE_CATEGORY = _open_scheme("age_category.json")
 
     WS_CORRECT_DATASET = _open_scheme("ws_correct_dataset.json")
