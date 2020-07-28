@@ -7,6 +7,7 @@ import geopandas
 import matplotlib.pyplot as plt
 import plotly.express as px
 from core_data_modules.cleaners import Codes
+from core_data_modules.cleaners.codes import KenyaCodes
 from core_data_modules.data_models.code_scheme import CodeTypes
 from core_data_modules.logging import Logger
 from core_data_modules.traced_data.io import TracedDataJsonIO
@@ -50,6 +51,7 @@ if __name__ == "__main__":
     IOUtils.ensure_dirs_exist(automated_analysis_output_dir)
     IOUtils.ensure_dirs_exist(f"{automated_analysis_output_dir}/maps/counties")
     IOUtils.ensure_dirs_exist(f"{automated_analysis_output_dir}/maps/constituencies")
+    IOUtils.ensure_dirs_exist(f"{automated_analysis_output_dir}/maps/kitui_makueni")
     IOUtils.ensure_dirs_exist(f"{automated_analysis_output_dir}/graphs")
 
     log.info("Loading Pipeline Configuration File...")
@@ -488,6 +490,69 @@ if __name__ == "__main__":
             MappingUtils.plot_water_bodies(lakes_map, ax=ax)
             plt.savefig(f"{automated_analysis_output_dir}/maps/constituencies/constituency_{cc.analysis_file_key}total_relevant.png",
                         dpi=1200, bbox_inches="tight")
+            plt.close(fig)
+
+    # Produce maps of Kitui/Makueni counties only
+    log.info("Loading the Kenya constituency geojson...")
+    constituencies_map = geopandas.read_file("geojson/kenya_constituencies.geojson")
+    urban_map = constituencies_map[constituencies_map.ADM1_AVF.isin({KenyaCodes.KITUI, KenyaCodes.MAKUENI})]
+
+    # Constituencies to label with their name, as requested by RDA for WorldVision.
+    constituencies_to_label_with_name = {}  # TODO
+
+    constituency_display_names = dict()  # of constituency id -> constituency name to display
+    for i, admin_region in constituencies_map.iterrows():
+        constituency_display_names[admin_region.ADM2_AVF] = admin_region.ADM2_EN
+
+    log.info("Generating a map of participation in Kitui/Makueni for the season")
+    urban_frequencies = dict()
+    labels = dict()
+    for code in CodeSchemes.KENYA_CONSTITUENCY.codes:
+        if code.code_type == CodeTypes.NORMAL:
+            urban_frequencies[code.string_value] = demographic_distributions["constituency"][code.code_id]
+
+            if code.string_value in constituencies_to_label_with_name:
+                constituency_name = constituency_display_names[code.string_value]
+                labels[code.string_value] = constituency_name + "\n" + str(urban_frequencies[code.string_value])
+            else:
+                labels[code.string_value] = str(urban_frequencies[code.string_value])
+
+    fig, ax = plt.subplots()
+    MappingUtils.plot_frequency_map(urban_map, "ADM2_AVF", urban_frequencies, ax=ax,
+                                    labels=labels, label_position_columns=("ADM2_LX", "ADM2_LY"),
+                                    legend_location="lower left",
+                                    callout_position_columns=("ADM2_CALLX", "ADM2_CALLY"))
+    fig.savefig(f"{automated_analysis_output_dir}/maps/kitui_makueni/kitui_makueni_total_participants.png", dpi=1200,
+                bbox_inches="tight")
+    plt.close(fig)
+
+    for plan in PipelineConfiguration.RQA_CODING_PLANS:
+        episode = episodes[plan.raw_field]
+
+        for cc in plan.coding_configurations:
+            # Plot a map of the total relevant participants for this coding configuration.
+            rqa_total_urban_frequencies = dict()
+            labels = dict()
+            for code in CodeSchemes.KENYA_CONSTITUENCY.codes:
+                if code.code_type == CodeTypes.NORMAL:
+                    rqa_total_urban_frequencies[code.string_value] = \
+                        episode["Total Relevant Participants"][f"constituency:{code.string_value}"]
+
+                    if code.string_value in constituencies_to_label_with_name:
+                        constituency_name = constituency_display_names[code.string_value]
+                        labels[code.string_value] = constituency_name + "\n" + str(
+                            rqa_total_urban_frequencies[code.string_value])
+                    else:
+                        labels[code.string_value] = str(rqa_total_urban_frequencies[code.string_value])
+
+            fig, ax = plt.subplots()
+            MappingUtils.plot_frequency_map(urban_map, "ADM2_AVF", rqa_total_urban_frequencies, ax=ax,
+                                            labels=labels, label_position_columns=("ADM2_LX", "ADM2_LY"),
+                                            legend_location="lower left",
+                                            callout_position_columns=("ADM2_CALLX", "ADM2_CALLY"))
+            plt.savefig(
+                f"{automated_analysis_output_dir}/maps/kitui_makueni/kitui_makueni_{cc.analysis_file_key}total_relevant.png",
+                dpi=1200, bbox_inches="tight")
             plt.close(fig)
 
     log.info("Graphing the per-episode engagement counts...")

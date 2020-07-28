@@ -13,7 +13,7 @@ class MappingUtils(object):
 
     @classmethod
     def plot_frequency_map(cls, geo_data, admin_id_column, frequencies, labels=None, label_position_columns=None,
-                           callout_position_columns=None, show_legend=True, ax=None):
+                           callout_position_columns=None, show_legend=True, legend_location="lower right", ax=None):
         """
         Plots a map of the given geo data with a choropleth showing the frequency of responses in each administrative
         region.
@@ -47,6 +47,8 @@ class MappingUtils(object):
         :param show_legend: Whether to draw a legend for the choropleth. The legend will be drawn to the bottom-right
                             corner.
         :type show_legend: bool
+        :param legend_location: matplotlib location, see https://matplotlib.org/3.1.1/api/_as_gen/matplotlib.pyplot.legend.html
+        :type legend_location: str | (float, float)
         :param ax: Axes on which to draw the plot. If None, draws to a new figure.
         :type ax: matplotlib.pyplot.Axes | None
         """
@@ -85,7 +87,7 @@ class MappingUtils(object):
                     facecolor=cls.AVF_COLOR_MAP(float(bin_id) / number_of_classes),
                     linewidth=0.1, edgecolor="black"
                 ))
-            ax.legend(handles=legend_elements, title="Participants", title_fontsize=6, loc="lower right",
+            ax.legend(handles=legend_elements, title="Participants", title_fontsize=6, loc=legend_location,
                       frameon=False, handlelength=1.8, handleheight=1.8, labelspacing=0, prop=dict(size=5.5))
 
         # Add a label to each administrative region showing its absolute frequency.
