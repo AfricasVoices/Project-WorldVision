@@ -495,7 +495,8 @@ if __name__ == "__main__":
     # Produce maps of Kitui/Makueni counties only
     log.info("Loading the Kenya constituency geojson...")
     constituencies_map = geopandas.read_file("geojson/kenya_constituencies.geojson")
-    urban_map = constituencies_map[constituencies_map.ADM1_AVF.isin({KenyaCodes.KITUI, KenyaCodes.MAKUENI})]
+    target_constituencies_map = constituencies_map[constituencies_map.ADM1_AVF.isin({KenyaCodes.KITUI, KenyaCodes.MAKUENI})]
+    target_counties_map = counties_map[counties_map.ADM1_AVF.isin({KenyaCodes.KITUI, KenyaCodes.MAKUENI})]
 
     # Constituencies to label with their name, as requested by RDA for WorldVision.
     constituencies_to_label_with_name = {}  # TODO
@@ -518,10 +519,14 @@ if __name__ == "__main__":
                 labels[code.string_value] = str(urban_frequencies[code.string_value])
 
     fig, ax = plt.subplots()
-    MappingUtils.plot_frequency_map(urban_map, "ADM2_AVF", urban_frequencies, ax=ax,
+    MappingUtils.plot_frequency_map(target_constituencies_map, "ADM2_AVF", urban_frequencies, ax=ax,
                                     labels=labels, label_position_columns=("ADM2_LX", "ADM2_LY"),
                                     legend_location="lower left",
                                     callout_position_columns=("ADM2_CALLX", "ADM2_CALLY"))
+    target_counties_map.geometry.boundary.plot(ax=ax, color=None, linewidth=0.6, edgecolor="black")
+    for i, admin_region in target_counties_map.iterrows():
+        ax.annotate(s=admin_region["ADM1_EN"], xy=(admin_region["ADM1_LX"], admin_region["ADM1_LY"]),
+                    ha="center", va="center", fontsize=5.5)
     fig.savefig(f"{automated_analysis_output_dir}/maps/kitui_makueni/kitui_makueni_total_participants.png", dpi=1200,
                 bbox_inches="tight")
     plt.close(fig)
@@ -546,10 +551,14 @@ if __name__ == "__main__":
                         labels[code.string_value] = str(rqa_total_urban_frequencies[code.string_value])
 
             fig, ax = plt.subplots()
-            MappingUtils.plot_frequency_map(urban_map, "ADM2_AVF", rqa_total_urban_frequencies, ax=ax,
+            MappingUtils.plot_frequency_map(target_constituencies_map, "ADM2_AVF", rqa_total_urban_frequencies, ax=ax,
                                             labels=labels, label_position_columns=("ADM2_LX", "ADM2_LY"),
                                             legend_location="lower left",
                                             callout_position_columns=("ADM2_CALLX", "ADM2_CALLY"))
+            target_counties_map.geometry.boundary.plot(ax=ax, color=None, linewidth=0.6, edgecolor="black")
+            for i, admin_region in target_counties_map.iterrows():
+                ax.annotate(s=admin_region["ADM1_EN"], xy=(admin_region["ADM1_LX"], admin_region["ADM1_LY"]),
+                            ha="center", va="center", fontsize=5.5)
             plt.savefig(
                 f"{automated_analysis_output_dir}/maps/kitui_makueni/kitui_makueni_{cc.analysis_file_key}total_relevant.png",
                 dpi=1200, bbox_inches="tight")
