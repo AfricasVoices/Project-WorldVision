@@ -21,6 +21,7 @@ mkdir -p "$DATA_ROOT/Coded Coda Files"
 
 DATASETS=(
     "WorldVision_s01e01"
+    "WorldVision_s01e02"
 
     "WorldVision_location"
     "WorldVision_age"

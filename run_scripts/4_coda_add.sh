@@ -20,6 +20,7 @@ git checkout "94a55d9218fb072ef2c15ee2c27c4214b036bd2f"  # (master which support
 
 DATASETS=(
     "WorldVision_s01e01"
+    "WorldVision_s01e02"
 
     "WorldVision_location"
     "WorldVision_age"

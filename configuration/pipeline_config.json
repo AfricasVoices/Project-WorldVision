@@ -7,7 +7,8 @@
       "TokenFileURL": "gs://avf-credentials/world-vision-textit-token.txt",
       "ContactsFileName": "contacts",
       "ActivationFlowNames": [
-        "worldvision_s01e01_activation"
+        "worldvision_s01e01_activation",
+        "worldvision_s01e02_activation"
       ],
       "SurveyFlowNames": [
         "worldvision_s01_demog"
@@ -29,6 +30,10 @@
     {"RapidProKey": "Rqa_S01E01 (Text) - worldvision_s01e01_activation", "PipelineKey": "rqa_s01e01_raw", "IsActivationMessage": true},
     {"RapidProKey": "Rqa_S01E01 (Run ID) - worldvision_s01e01_activation", "PipelineKey": "rqa_s01e01_run_id"},
     {"RapidProKey": "Rqa_S01E01 (Time) - worldvision_s01e01_activation", "PipelineKey": "sent_on"},
+    
+    {"RapidProKey": "Rqa_S01E02 (Text) - worldvision_s01e02_activation", "PipelineKey": "rqa_s01e02_raw", "IsActivationMessage": true},
+    {"RapidProKey": "Rqa_S01E02 (Run ID) - worldvision_s01e02_activation", "PipelineKey": "rqa_s01e02_run_id"},
+    {"RapidProKey": "Rqa_S01E02 (Time) - worldvision_s01e02_activation", "PipelineKey": "sent_on"},
 
     {"RapidProKey": "Constituency (Text) - worldvision_s01_demog", "PipelineKey": "location_raw"},
     {"RapidProKey": "Constituency (Time) - worldvision_s01_demog", "PipelineKey": "location_time"},
