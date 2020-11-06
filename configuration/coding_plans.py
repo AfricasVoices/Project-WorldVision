@@ -53,6 +53,23 @@ def get_rqa_coding_plans(pipeline_name):
                        )
                    ],
                    ws_code=CodeSchemes.WS_CORRECT_DATASET.get_code_with_match_value("s01e02"),
+                   raw_field_fold_strategy=FoldStrategies.concatenate),
+
+        CodingPlan(raw_field="rqa_s01e03_raw",
+                   time_field="sent_on",
+                   run_id_field="rqa_s01e03_run_id",
+                   coda_filename="WorldVision_s01e03.json",
+                   icr_filename="s01e03.csv",
+                   coding_configurations=[
+                       CodingConfiguration(
+                           coding_mode=CodingModes.MULTIPLE,
+                           code_scheme=CodeSchemes.S01E03,
+                           coded_field="rqa_s01e03_coded",
+                           analysis_file_key="rqa_s01e03_",
+                           fold_strategy=lambda x, y: FoldStrategies.list_of_labels(CodeSchemes.S01E03, x, y)
+                       )
+                   ],
+                   ws_code=CodeSchemes.WS_CORRECT_DATASET.get_code_with_match_value("s01e03"),
                    raw_field_fold_strategy=FoldStrategies.concatenate)
     ]
 
