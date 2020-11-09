@@ -59,6 +59,17 @@
       ]
     },
     {
+      "CodeID": "code-c6d30e11",
+      "CodeType": "Normal",
+      "DisplayText": "s01e03",
+      "StringValue": "s01e03",
+      "NumericValue": 6,
+      "VisibleInCoda": true,
+      "MatchValues": [
+        "s01e03"
+      ]
+    },
+    {
       "CodeID": "code-NC-42f1d983",
       "CodeType": "Control",
       "ControlCode": "NC",
