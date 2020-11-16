@@ -93,15 +93,9 @@ if __name__ == "__main__":
     log.info(f"Converting {len(uuids)} uuids to phone numbers...")
     uuid_phone_number_lut = phone_number_uuid_table.uuid_to_data_batch(uuids)
     phone_numbers = set()
-    skipped_uuids = set()
     for uuid in uuids:
-        # Some uuids are no longer re-identifiable due to a uuid table consistency issue between OCHA and WorldBank-PLR
-        if uuid in uuid_phone_number_lut:
-            phone_numbers.add(f"+{uuid_phone_number_lut[uuid]}")
-        else:
-            skipped_uuids.add(uuid)
+        phone_numbers.add(f"+{uuid_phone_number_lut[uuid]}")
     log.info(f"Successfully converted {len(phone_numbers)} uuids to phone numbers.")
-    log.warning(f"Unable to re-identify {len(skipped_uuids)} uuids")
 
     # Export contacts CSV
     log.warning(f"Exporting {len(phone_numbers)} phone numbers to {csv_output_file_path}...")
