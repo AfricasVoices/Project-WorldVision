@@ -4,6 +4,70 @@
   "Version": "0.0.0.1",
   "Codes": [
     {
+      "CodeID": "code-4b89e1ef",
+      "CodeType": "Normal",
+      "DisplayText": "loss of livelihood/jobs",
+      "NumericValue": 1,
+      "StringValue": "loss_of_livelihood_or_jobs",
+      "VisibleInCoda": true
+    },
+    {
+      "CodeID": "code-7d34f891",
+      "CodeType": "Normal",
+      "DisplayText": "economic hardships",
+      "NumericValue": 2,
+      "StringValue": "economic_hardships",
+      "VisibleInCoda": true
+    },
+    {
+      "CodeID": "code-8c5f81de",
+      "CodeType": "Normal",
+      "DisplayText": "struggling economy",
+      "NumericValue": 3,
+      "StringValue": "struggling_economy",
+      "VisibleInCoda": true
+    },
+    {
+      "CodeID": "code-cd885ed5",
+      "CodeType": "Normal",
+      "DisplayText": "inability to access loans/raise loan contributions",
+      "NumericValue": 4,
+      "StringValue": "inability_to_access_loans_and_raise_loan_contributions",
+      "VisibleInCoda": true
+    },
+    {
+      "CodeID": "code-55fa5ff4",
+      "CodeType": "Normal",
+      "DisplayText": "domestic conflicts/moral decadence among youth",
+      "NumericValue": 5,
+      "StringValue": "domestic_conflicts_and_moral_decadence_among_youth",
+      "VisibleInCoda": true
+    },
+    {
+      "CodeID": "code-39218d66",
+      "CodeType": "Normal",
+      "DisplayText": "development challenges due to coronavirus",
+      "NumericValue": 6,
+      "StringValue": "development_challenges_due_to_coronavirus",
+      "VisibleInCoda": true
+    },
+    {
+      "CodeID": "code-6ef86964",
+      "CodeType": "Normal",
+      "DisplayText": "loss of life",
+      "NumericValue": 7,
+      "StringValue": "loss_of_life",
+      "VisibleInCoda": true
+    },
+    {
+      "CodeID": "code-aa79872d",
+      "CodeType": "Normal",
+      "DisplayText": "other theme",
+      "NumericValue": 8,
+      "StringValue": "other_theme",
+      "VisibleInCoda": true
+    },
+    {
       "CodeID": "code-NA-f93d3eb7",
       "CodeType": "Control",
       "ControlCode": "NA",
