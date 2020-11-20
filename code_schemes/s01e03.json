@@ -4,6 +4,70 @@
   "Version": "0.0.0.1",
   "Codes": [
     {
+      "CodeID": "code-fbbc3182",
+      "CodeType": "Normal",
+      "DisplayText": "education must continue",
+      "NumericValue": 1,
+      "StringValue": "education_must_continue",
+      "VisibleInCoda": true
+    },
+    {
+      "CodeID": "code-b90b35a7",
+      "CodeType": "Normal",
+      "DisplayText": "interrupted learning",
+      "NumericValue": 2,
+      "StringValue": "interrupted_learning",
+      "VisibleInCoda": true
+    },
+    {
+      "CodeID": "code-433d7bdb",
+      "CodeType": "Normal",
+      "DisplayText": "more delinquency and increased drop-outs",
+      "NumericValue": 3,
+      "StringValue": "more_delinquency_and_increased_drop-outs",
+      "VisibleInCoda": true
+    },
+    {
+      "CodeID": "code-d0901eee",
+      "CodeType": "Normal",
+      "DisplayText": "risk of further spread of covid19 after reopening schools",
+      "NumericValue": 4,
+      "StringValue": "risk_of_further_spread_of_covid_after_reopening_schools",
+      "VisibleInCoda": true
+    },
+    {
+      "CodeID": "code-5150d5e7",
+      "CodeType": "Normal",
+      "DisplayText": "financial challenges for parents",
+      "NumericValue": 5,
+      "StringValue": "financial_challenges_for_parents",
+      "VisibleInCoda": true
+    },
+    {
+      "CodeID": "code-59f56f63",
+      "CodeType": "Normal",
+      "DisplayText": "adoption of covid19 preventive guidelines in schools",
+      "NumericValue": 6,
+      "StringValue": "adoption_of_covid_preventive_guidelines_in_schools",
+      "VisibleInCoda": true
+    },
+    {
+      "CodeID": "code-ac8051a7",
+      "CodeType": "Normal",
+      "DisplayText": "recommendations to make education in schools safe",
+      "NumericValue": 7,
+      "StringValue": "recommendations_to_make_education_in_schools_safe",
+      "VisibleInCoda": true
+    },
+    {
+      "CodeID": "code-d236d489",
+      "CodeType": "Normal",
+      "DisplayText": "other theme",
+      "NumericValue": 8,
+      "StringValue": "other_theme",
+      "VisibleInCoda": true
+    },
+    {
       "CodeID": "code-NA-f93d3eb7",
       "CodeType": "Control",
       "ControlCode": "NA",
