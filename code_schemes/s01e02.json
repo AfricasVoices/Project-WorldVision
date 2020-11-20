@@ -4,6 +4,62 @@
   "Version": "0.0.0.1",
   "Codes": [
     {
+      "CodeID": "code-6fdf668e",
+      "CodeType": "Normal",
+      "DisplayText": "economic hardships",
+      "NumericValue": 1,
+      "StringValue": "economic_hardships",
+      "VisibleInCoda": true
+    },
+    {
+      "CodeID": "code-93910823",
+      "CodeType": "Normal",
+      "DisplayText": "struggling economy",
+      "NumericValue": 2,
+      "StringValue": "struggling_economy",
+      "VisibleInCoda": true
+    },
+    {
+      "CodeID": "code-6a664f46",
+      "CodeType": "Normal",
+      "DisplayText": "inability to access loans/raise loan contributions",
+      "NumericValue": 3,
+      "StringValue": "inability to access loans and raise loan contributions",
+      "VisibleInCoda": true
+    },
+    {
+      "CodeID": "code-37a1fd44",
+      "CodeType": "Normal",
+      "DisplayText": "domestic conflicts/moral decadence among the youth",
+      "NumericValue": 4,
+      "StringValue": "domestic_conflicts_and_moral_decadence_among_the_youth",
+      "VisibleInCoda": true
+    },
+    {
+      "CodeID": "code-f1e3fccd",
+      "CodeType": "Normal",
+      "DisplayText": "development challenges due to covid19",
+      "NumericValue": 5,
+      "StringValue": "development_challenges_due_to_covid19",
+      "VisibleInCoda": true
+    },
+    {
+      "CodeID": "code-d1f3b4f6",
+      "CodeType": "Normal",
+      "DisplayText": "loss of life",
+      "NumericValue": 6,
+      "StringValue": "loss_of_life",
+      "VisibleInCoda": true
+    },
+    {
+      "CodeID": "code-8bdba7de",
+      "CodeType": "Normal",
+      "DisplayText": "other theme",
+      "NumericValue": 7,
+      "StringValue": "other_theme",
+      "VisibleInCoda": true
+    },
+    {
       "CodeID": "code-NA-f93d3eb7",
       "CodeType": "Control",
       "ControlCode": "NA",
