@@ -378,8 +378,6 @@ if __name__ == "__main__":
         for sample in samples:
             writer.writerow(sample)
 
-    exit(0)
-
     # Produce maps of Kenya at county level
     log.info("Loading the Kenya county geojson...")
     counties_map = geopandas.read_file("geojson/kenya_counties.geojson")
