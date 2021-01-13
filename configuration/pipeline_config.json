@@ -9,7 +9,8 @@
       "ActivationFlowNames": [
         "worldvision_s01e01_activation",
         "worldvision_s01e02_activation",
-        "worldvision_s01e03_activation"
+        "worldvision_s01e03_activation",
+        "worldvision_s01_close_out_activation"
       ],
       "SurveyFlowNames": [
         "worldvision_s01_demog"
@@ -39,6 +40,10 @@
     {"RapidProKey": "Rqa_S01E03 (Text) - worldvision_s01e03_activation", "PipelineKey": "rqa_s01e03_raw", "IsActivationMessage": true},
     {"RapidProKey": "Rqa_S01E03 (Run ID) - worldvision_s01e03_activation", "PipelineKey": "rqa_s01e03_run_id"},
     {"RapidProKey": "Rqa_S01E03 (Time) - worldvision_s01e03_activation", "PipelineKey": "sent_on"},
+
+    {"RapidProKey": "S01_Close_Out (Text) - worldvision_s01_close_out_activation", "PipelineKey": "s01_close_out_raw", "IsActivationMessage": true},
+    {"RapidProKey": "S01_Close_Out (Run ID) - worldvision_s01_close_out_activation", "PipelineKey": "s01_close_out_run_id"},
+    {"RapidProKey": "S01_Close_Out (Time) - worldvision_s01_close_out_activation", "PipelineKey": "sent_on"},
 
     {"RapidProKey": "Constituency (Text) - worldvision_s01_demog", "PipelineKey": "location_raw"},
     {"RapidProKey": "Constituency (Time) - worldvision_s01_demog", "PipelineKey": "location_time"},

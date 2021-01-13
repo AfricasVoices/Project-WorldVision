@@ -70,6 +70,17 @@
       ]
     },
     {
+      "CodeID": "code-42b1a456",
+      "CodeType": "Normal",
+      "DisplayText": "s01 close-out",
+      "StringValue": "s01_close_out",
+      "NumericValue": 7,
+      "VisibleInCoda": true,
+      "MatchValues": [
+        "s01 close-out"
+      ]
+    },
+    {
       "CodeID": "code-NC-42f1d983",
       "CodeType": "Control",
       "ControlCode": "NC",

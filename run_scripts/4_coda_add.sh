@@ -22,6 +22,7 @@ DATASETS=(
     "WorldVision_s01e01"
     "WorldVision_s01e02"
     "WorldVision_s01e03"
+    "WorldVision_s01_close_out"
 
     "WorldVision_location"
     "WorldVision_age"
